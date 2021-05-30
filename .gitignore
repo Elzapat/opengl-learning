@@ -1,0 +1,8 @@
+CMakeFiles/
+CMakeCache.txt
+camke_install.cmake
+glad/
+learn-opengl
+Makefile
+.ccls-cache/
+cmake_install.cmake

@@ -1,0 +1,37 @@
+[
+ {
+  "directory": "/home/morgan/Programmation/learn_OpenGL",
+  "arguments": [
+   "/usr/bin/cc",
+   "-I/home/morgan/Programmation/learn_OpenGL/glad/include",
+   "-MD",
+   "-MT",
+   "glad/CMakeFiles/glad.dir/src/glad.c.o",
+   "-MF",
+   "CMakeFiles/glad.dir/src/glad.c.o.d",
+   "-o",
+   "CMakeFiles/glad.dir/src/glad.c.o",
+   "-c",
+   "/home/morgan/Programmation/learn_OpenGL/glad/src/glad.c"
+  ],
+  "file": "/home/morgan/Programmation/learn_OpenGL/glad/src/glad.c"
+ },
+ {
+  "directory": "/home/morgan/Programmation/learn_OpenGL",
+  "arguments": [
+   "/usr/bin/cc",
+   "-I/home/morgan/Programmation/learn_OpenGL/include",
+   "-I/home/morgan/Programmation/learn_OpenGL/glad/include",
+   "-MD",
+   "-MT",
+   "CMakeFiles/learn-opengl.dir/src/main.c.o",
+   "-MF",
+   "CMakeFiles/learn-opengl.dir/src/main.c.o.d",
+   "-o",
+   "CMakeFiles/learn-opengl.dir/src/main.c.o",
+   "-c",
+   "/home/morgan/Programmation/learn_OpenGL/src/main.c"
+  ],
+  "file": "/home/morgan/Programmation/learn_OpenGL/src/main.c"
+ }
+]

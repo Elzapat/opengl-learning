@@ -10,6 +10,7 @@ add_executable(learn-opengl
     src/main.c
     src/shader.c
     include/shader.h
+    include/stb_image.h
 )
 
 find_package(glfw3 3.3 REQUIRED)

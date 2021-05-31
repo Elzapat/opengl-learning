@@ -6,3 +6,4 @@ learn-opengl
 Makefile
 .ccls-cache/
 cmake_install.cmake
+compile_commands.json

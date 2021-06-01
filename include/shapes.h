@@ -8,5 +8,6 @@
 unsigned int create_first_triangle();
 unsigned int create_second_triangle();
 unsigned int create_rectangle();
+unsigned int create_rainbow_rect();
 
 #endif // SHAPES_H

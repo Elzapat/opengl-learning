@@ -17,6 +17,8 @@ add_executable(learn-opengl
     include/stb_image.h
 )
 
+set_property(TARGET learn-opengl PROPERTY C_STANDARD 11)
+
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL REQUIRED)
 

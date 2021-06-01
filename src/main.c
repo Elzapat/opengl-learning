@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <cglm/cglm.h>
+#include <cglm/struct.h>
 #include <glad/glad.h>
 
 #include "../include/shader.h"
@@ -40,10 +41,13 @@ int main() {
             "src/shaders/vertex_shader.vert", "src/shaders/yellow_frag_shader.frag");
     unsigned int texture_shader_program = create_shader_program(
             "src/shaders/tex_vertex_shader.vert", "src/shaders/tex_frag_shader.vert");
+    unsigned int trans_shader_program = create_shader_program(
+            "src/shaders/trans_vertex_shader.vert", "src/shaders/trans_fragment_shader.frag");
 
     unsigned int first_triangle = create_first_triangle();
     unsigned int second_triangle = create_second_triangle();
     unsigned int rectangle = create_rectangle();
+    unsigned int rainbow_rectangle = create_rainbow_rect();
 
     unsigned int benoit_texture = create_benoit_texture();
     unsigned int aragorgne_texture = create_aragorgne_texture();
@@ -62,8 +66,9 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // --------------------------------------------
+        // Moving triangle
         glUseProgram(shader_program);
-
         glBindVertexArray(first_triangle);
 
         float time_value = glfwGetTime();
@@ -88,14 +93,38 @@ int main() {
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
+        // --------------------------------------------
+        // Static triangle
         glUseProgram(yellow_shader_program);
-
         glBindVertexArray(second_triangle);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
+        // --------------------------------------------
+        // Textured rectangle
         glUseProgram(texture_shader_program);
         glUniform1f(glGetUniformLocation(texture_shader_program, "mix_value"), mix_value);
         glBindVertexArray(rectangle);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        // --------------------------------------------
+        // Transformed rainbow rectangle
+        glUseProgram(trans_shader_program);
+        glBindVertexArray(rainbow_rectangle);
+
+        mat4 trans = GLM_MAT4_IDENTITY_INIT;
+        glm_translate(trans, (vec3){0.2f, -0.2f, 0.0f});
+        glm_rotate(trans, glm_rad(50 * time_value), (vec3){ 0.0, 0.0, 1.0 });
+        glm_scale(trans, (vec3){ 0.5f, 0.7f, 0.5f });
+
+        unsigned int transform_location = glGetUniformLocation(trans_shader_program, "transform");
+        glUniformMatrix4fv(transform_location, 1, GL_FALSE, (float *)trans);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        mat4 trans2 = GLM_MAT4_IDENTITY_INIT;
+        glm_translate(trans2, (vec3){-0.5f, 0.5f, 0.0f});
+        glm_scale(trans2, (vec3){ sin(time_value), 0.2f, 0.5f });
+
+        glUniformMatrix4fv(transform_location, 1, GL_FALSE, (float *)trans2);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // events and swapping buffers
@@ -116,13 +145,15 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 }
 
 void process_input(GLFWwindow* window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GL_TRUE);
-    else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    } else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
         mix_value += 0.02f;
-    else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+        if (mix_value >= 10.0f)
+            mix_value = 10.0f;
+    } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
         mix_value -= 0.02f;
-
-    if (mix_value >= 10.0f) mix_value = 10.0f;
-    if (mix_value <= -10.0f) mix_value = -10.0f;
+        if (mix_value <= -10.0f)
+            mix_value = -10.0f;
+    }
 }

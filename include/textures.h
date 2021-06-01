@@ -7,5 +7,6 @@
 
 unsigned int create_benoit_texture();
 unsigned int create_aragorgne_texture();
+unsigned int create_julien_texture();
 
 #endif // TEXTURE_H

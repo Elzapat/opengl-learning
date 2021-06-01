@@ -43,7 +43,7 @@ unsigned int create_shader_program(const char* vert, const char* frag) {
     glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(vertex_shader, INFO_LOG_SIZE, NULL, info_log);
-        printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s", info_log);
+        printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED::%s\n%s", frag, info_log);
     }
 
     fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -53,7 +53,7 @@ unsigned int create_shader_program(const char* vert, const char* frag) {
     glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(fragment_shader, INFO_LOG_SIZE, NULL, info_log);
-        printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s", info_log);
+        printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED::%s\n%s", vert, info_log);
     }
 
     unsigned int shader_program = glCreateProgram();

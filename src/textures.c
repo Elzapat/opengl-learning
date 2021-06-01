@@ -59,3 +59,31 @@ unsigned int create_aragorgne_texture() {
 
     return texture;
 }
+
+unsigned int create_julien_texture() {
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    int width, height, nb_channels;
+    unsigned char* image_data = stbi_load("assets/julien.png", &width, &height,
+            &nb_channels, 0);
+
+    if (!image_data) {
+        printf("Error loading texture\n");
+        exit(-1);
+    }
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA,
+            GL_UNSIGNED_BYTE, image_data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    stbi_image_free(image_data);
+
+    return texture;
+}

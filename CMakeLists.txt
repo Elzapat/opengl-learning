@@ -11,9 +11,11 @@ add_executable(learn-opengl
     src/shader.c
     src/shapes.c
     src/textures.c
+    src/camera.c
     include/shader.h
     include/textures.h
     include/shapes.h
+    include/camera.h
     include/stb_image.h
 )
 

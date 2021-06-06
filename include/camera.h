@@ -24,6 +24,9 @@ struct Camera {
     float movement_speed;
     float mouse_sensitivity;
     float zoom;
+    // screen properties
+    unsigned int screen_width;
+    unsigned int screen_height;
 };
 
 enum CameraMovement {

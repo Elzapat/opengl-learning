@@ -9,7 +9,9 @@ Camera camera_new(float x, float y, float z, float up_x, float up_y, float up_z)
         .pitch = PITCH,
         .movement_speed = SPEED,
         .mouse_sensitivity = SENSITIVITY,
-        .zoom = ZOOM
+        .zoom = ZOOM,
+        .screen_width = 800,
+        .screen_height = 600,
     };
     camera_update_vectors(&new_camera);
     return new_camera;
